@@ -3,7 +3,7 @@ pipeline {
 
     triggers {
         githubPush()
-    } 
+    }
 
     parameters {
         string(name: 'GIT_REPO_URL', defaultValue: 'git@github.com:valdemar414/realworld-angular-dockerized.git', description: 'Git Repository URL')
