@@ -26,48 +26,48 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image STG') {
-            steps {
-                script {
-                    def customImageSTG = docker.build("${params.DOCKER_IMAGE_STG}:${params.DOCKER_IMAGE_MAJOR_TAG}${env.BUILD_ID}", "-f ${env.DOCKERFILE_STG} .")
-                    customImageSTG.tag("latest", false)
+    //     stage('Build Docker Image STG') {
+    //         steps {
+    //             script {
+    //                 def customImageSTG = docker.build("${params.DOCKER_IMAGE_STG}:${params.DOCKER_IMAGE_MAJOR_TAG}${env.BUILD_ID}", "-f ${env.DOCKERFILE_STG} .")
+    //                 customImageSTG.tag("latest", false)
 
                     
-                }
-            }
-        }
+    //             }
+    //         }
+    //     }
 
-        stage('Push Docker Image STG') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', env.DOCKERHUB_CREDENTIALS) {
-                        docker.image("${params.DOCKER_IMAGE_STG}:${params.DOCKER_IMAGE_MAJOR_TAG}${env.BUILD_ID}").push()
-                        docker.image("${params.DOCKER_IMAGE_STG}:latest").push()
-                    }
-                }
-            }
-        }
+    //     stage('Push Docker Image STG') {
+    //         steps {
+    //             script {
+    //                 docker.withRegistry('https://registry.hub.docker.com', env.DOCKERHUB_CREDENTIALS) {
+    //                     docker.image("${params.DOCKER_IMAGE_STG}:${params.DOCKER_IMAGE_MAJOR_TAG}${env.BUILD_ID}").push()
+    //                     docker.image("${params.DOCKER_IMAGE_STG}:latest").push()
+    //                 }
+    //             }
+    //         }
+    //     }
             
-        stage('Build Docker Image PROD') {
-            steps {
-                script {
-                    def customImageSTG = docker.build("${params.DOCKER_IMAGE_PROD}:${params.DOCKER_IMAGE_MAJOR_TAG}${env.BUILD_ID}", "-f ${env.DOCKERFILE_PROD} .")
-                    customImageSTG.tag("latest", false)
-                }
-            }
-        }
+    //     stage('Build Docker Image PROD') {
+    //         steps {
+    //             script {
+    //                 def customImageSTG = docker.build("${params.DOCKER_IMAGE_PROD}:${params.DOCKER_IMAGE_MAJOR_TAG}${env.BUILD_ID}", "-f ${env.DOCKERFILE_PROD} .")
+    //                 customImageSTG.tag("latest", false)
+    //             }
+    //         }
+    //     }
 
-        stage('Push Docker Image PROD') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', env.DOCKERHUB_CREDENTIALS) {
-                        docker.image("${params.DOCKER_IMAGE_PROD}:${params.DOCKER_IMAGE_MAJOR_TAG}${env.BUILD_ID}").push()
-                        docker.image("${params.DOCKER_IMAGE_PROD}:latest").push()
-                    }
-                }
-            }
-        }
-    }
+    //     stage('Push Docker Image PROD') {
+    //         steps {
+    //             script {
+    //                 docker.withRegistry('https://registry.hub.docker.com', env.DOCKERHUB_CREDENTIALS) {
+    //                     docker.image("${params.DOCKER_IMAGE_PROD}:${params.DOCKER_IMAGE_MAJOR_TAG}${env.BUILD_ID}").push()
+    //                     docker.image("${params.DOCKER_IMAGE_PROD}:latest").push()
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     post {
         always {
