@@ -73,5 +73,14 @@ pipeline {
         always {
             cleanWs()
         }
+        success {
+            script {
+                try {
+                    build job: 'onb-STG-realworld-app-deploy', parameters: [string(name: 'POST_TRIGGER', value: 'true')]
+                } catch (Exception e) {
+                    echo "Post action job FAILED: ${e.getMessage()}"
+                }
+            }
+        }
     }
 }
